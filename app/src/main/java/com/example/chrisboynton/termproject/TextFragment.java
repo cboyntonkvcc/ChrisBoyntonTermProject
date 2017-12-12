@@ -1,6 +1,7 @@
 package com.example.chrisboynton.termproject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -20,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Created by chrisboynton on 12/5/17.
+ * Created by chrisboynton on 11/5/17.
  */
 
 public class TextFragment extends Fragment {
@@ -30,6 +31,10 @@ public class TextFragment extends Fragment {
     private Button mPlusButton;
     private TextView mCount;
     private int mCounter = 0;
+
+    private int mMessageInt;
+
+    private String mMessageEnding;
 
     private RadioGroup mRelationRadioGroup;
 
@@ -45,6 +50,8 @@ public class TextFragment extends Fragment {
 
     private TextView mContactName;
 
+
+
     private static final int REQUEST_CONTACT = 1;
 
     GenerateText generateText = new GenerateText();
@@ -57,7 +64,7 @@ public class TextFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_text, container , false);
 
@@ -128,26 +135,31 @@ public class TextFragment extends Fragment {
                 }else {
 
                     if (selected == mFamilyRadioButton.getId()) {
-                        generateText.generateText(mCounter,1);
+                         mMessageInt = generateText.generateText(mCounter);
+                         mMessageEnding = getString(R.string.family_end);
 
                     }
                     if (selected == mFriendsRadioButton.getId()) {
-                        generateText.generateText(mCounter,2);
+                        mMessageInt = generateText.generateText(mCounter);
+                        mMessageEnding = getString(R.string.friend_end);
 
                     }
                     if (selected == mSignificantOtherRadioButton.getId()) {
-                        generateText.generateText(mCounter,3);
+                        mMessageInt = generateText.generateText(mCounter);
+                        mMessageEnding = getString(R.string.significant_end);
 
                     }
                     if (selected == mGenericRadioButton.getId()) {
-                        generateText.generateText(mCounter,4);
+                        mMessageInt = generateText.generateText(mCounter);
+                        mMessageEnding = "";
+
 
                     }
 
 
                     Intent i = new Intent(Intent.ACTION_SEND);
                     i.setType("text/plain");
-                    i.putExtra(Intent.EXTRA_TEXT, getText());
+                    i.putExtra(Intent.EXTRA_TEXT, getTextMessage(mMessageInt));
                     i.putExtra(Intent.EXTRA_SUBJECT, mText.getmContact());
                     i.putExtra("address", mText.getmPhone());
                     i = Intent.createChooser(i, getString(R.string.send_message_via));
@@ -198,7 +210,8 @@ public class TextFragment extends Fragment {
                 String id = contactUri.getLastPathSegment();
 
                 // query for the information
-               c = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,  null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "= ?", new String[] { id }, null);
+               c = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                       null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "= ?", new String[] { id }, null);
 
                 //set the name from the database
                 int nameId = c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
@@ -220,7 +233,7 @@ public class TextFragment extends Fragment {
 
                 }
                 //enable and disable buttons so they can email but not select another contact
-                mContactButton.setEnabled(false);
+                //mContactButton.setEnabled(false);
                 mSendMessageButton.setEnabled(true);
                 mContactName.setText(name);
 
@@ -232,11 +245,11 @@ public class TextFragment extends Fragment {
     }
 
 
-    private String getText(){
+    private String getTextMessage(int message){
 
 
 
-        String report = ("" + mCounter + mText.getmPhone() + mText.getmContact());
+        String report = ("" + mText.getmContact() + ", \n" + getString(message) + "\n\n" + mMessageEnding);
 
 
 

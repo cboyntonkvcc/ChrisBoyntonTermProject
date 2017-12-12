@@ -24,5 +24,25 @@
     <string name="send_message_via">Send Message via</string>
 
 
+    <string name="importance_1_1">Remind me when I see you, I got something to tell you</string>
+    <string name="importance_1_2">Remind me when I see you, I have something pretty cool to tell you</string>
+    <string name="importance_1_3">Remind me when I see you, I have something interesting to tell you</string>
+
+    <string name="importance_2_1">Remind me when I see you, I got something amazing to tell you</string>
+    <string name="importance_2_2">Remind me when I see you, I have something really cool to tell you</string>
+    <string name="importance_2_3">Remind me when I see you, I have something very interesting to tell you</string>
+
+    <string name="importance_3_1">Remind me when I see you, I got something absolutely amazing to tell you</string>
+    <string name="importance_3_2">Remind me when I see you, I have the most amazing really cool thing to tell you</string>
+    <string name="importance_3_3">Remind me when I see you, I have something extremely interesting to tell you</string>
+
+
+    <string name="family_end">Sincerely your favorite family member</string>
+    <string name="friend_end">From Your Best friend</string>
+    <string name="significant_end">Love your favorite person</string>
+
+
+
+
 
 </resources>

@@ -1,54 +1,90 @@
 package com.example.chrisboynton.termproject;
 
+import android.content.Context;
+
+import java.util.Random;
+
 /**
  * Created by chrisboynton on 12/6/17.
  */
 
 public class GenerateText {
 
-    String output;
+    int output;
+    String Value;
+    Random randomGenerator = new Random();
+    int codeValue;
+    int randomInt = randomGenerator.nextInt(3);
 
 
-    public String generateText(int impvalue, int relation ) {
+    public int generateText(int impValue) {
 
-        if (impvalue <= 3)
+
+        if (impValue <= 3)
         {
 
-            output = "<=3";
+            leastImportant();
 
         }
-        if (impvalue > 3 || impvalue <= 7){
-
-
-            output = ">=3 or <=7";
+        if (impValue > 3 && impValue <= 7){
+            Important();
         }
-        if (impvalue > 7)
+        if (impValue > 7)
         {
-            output = ">7";
+            mostImportant();
         }
 
-        if(1 == relation)
-        {
-            //family
 
-        }
-        if(2 == relation)
-        {
-            //friends
 
-        }
-        if(3 == relation)
-        {
-            //significant
 
-        }else
-        {
-            //generic
-
-        }
-
-        return null;
+        return output;
     }
+
+
+
+
+    private void leastImportant()
+    {
+        if (randomInt == 0) {
+            output = R.string.importance_1_1;
+        }
+        if (randomInt == 1) {
+            output = R.string.importance_1_2;
+        }
+        if(randomInt == 2) {
+            output = R.string.importance_1_3;
+        }
+    }
+
+    private void Important()
+    {
+        if (randomInt == 0) {
+            output = R.string.importance_2_1;
+        }
+        if (randomInt == 1) {
+            output = R.string.importance_2_2;
+        }
+        if (randomInt == 2) {
+
+            output = R.string.importance_2_3;
+        }
+
+    }
+
+    private void mostImportant()
+    {
+        if (randomInt == 0) {
+            output = R.string.importance_3_1;
+        }
+        if(randomInt == 1) {
+            output = R.string.importance_3_2;
+        }
+        if (randomInt == 2) {
+            output = R.string.importance_3_3;
+        }
+
+    }
+
 
 
 

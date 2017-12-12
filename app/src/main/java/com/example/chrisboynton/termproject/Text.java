@@ -3,7 +3,7 @@ package com.example.chrisboynton.termproject;
 import java.util.UUID;
 
 /**
- * Created by chrisboynton on 12/5/17.
+ * Created by chrisboynton on 11/5/17.
  */
 
 public class Text {
@@ -12,6 +12,7 @@ public class Text {
     private String mTitle;
     private String mContact;
     private String mPhone;
+
 
 
     public UUID getmId() {
@@ -45,4 +46,6 @@ public class Text {
     public void setmPhone(String mPhone) {
         this.mPhone = mPhone;
     }
+
+
 }
