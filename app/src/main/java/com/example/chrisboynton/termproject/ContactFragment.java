@@ -15,15 +15,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
- * Created by chrisboynton on 12/12/17.
+ * Created by chrisboynton on 12/1/17.
  */
 
 public class ContactFragment extends Fragment {
 
+    //inizialize variables
     private Button mContactInfo;
     private Button mContact;
     private Button mSendMessage;
 
+    //different constants for the differnt buttons that reference the contact app
     private static final int REQUEST_CONTACT = 1;
     private static final int REQUEST_CONTACTS = 2;
 
@@ -52,6 +54,8 @@ public class ContactFragment extends Fragment {
 
 
 
+        //send the action to open the messageing app and sends with it the information from
+        //the contact selected
         mSendMessage.setEnabled(false);
         mSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +76,7 @@ public class ContactFragment extends Fragment {
 
 
 
+        //starts the Contacts app and retrieves the data from the selected contact
         final Intent pickContact = new Intent(Intent.ACTION_PICK,
                 ContactsContract.Contacts.CONTENT_URI);
         mContactInfo = (Button) view.findViewById(R.id.contact_info_button);
@@ -83,6 +88,7 @@ public class ContactFragment extends Fragment {
             }
         });
 
+        //starts the Contacts app and retrieves the data from the selected contact
         final Intent pickContacts = new Intent(Intent.ACTION_PICK,
                 ContactsContract.Contacts.CONTENT_URI);
         mContact.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +104,7 @@ public class ContactFragment extends Fragment {
 
 
 
+        //checks for the default contacts app
         PackageManager packageManager = getActivity().getPackageManager();
         if(packageManager.resolveActivity(pickContact, PackageManager.MATCH_DEFAULT_ONLY) == null){
             mContactInfo.setEnabled(false);
@@ -112,6 +119,7 @@ public class ContactFragment extends Fragment {
     }
 
 
+    //once the contact is selected and the app returns to my fragments this gets called
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode != Activity.RESULT_OK){
@@ -120,9 +128,12 @@ public class ContactFragment extends Fragment {
         if(requestCode == REQUEST_CONTACT ||requestCode == REQUEST_CONTACTS && data != null) {
             Uri contactUri = data.getData();
 
+            //used multiple cursors made more sence to me but might not be optimal
             Cursor c = null;
             Cursor emailCursor = null;
             Cursor addressCursor = null;
+
+
             String phone = "";
             String name = "";
             String email = "";
@@ -145,14 +156,17 @@ public class ContactFragment extends Fragment {
                 //set the name from the database
                 int nameId = c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
 
-                //set the email from the data base
+                //set the phone from the data base
                 int phoneId = c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA);
 
+                //set the email
                 int emailId = emailCursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA);
 
+                //set the adress
                 int addressId = addressCursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS);
 
 
+                //only gets called for the specific button is pressed
                 if (requestCode == REQUEST_CONTACTS){
                     if (c.moveToFirst()) {
                         phone = c.getString(phoneId);
@@ -190,13 +204,13 @@ public class ContactFragment extends Fragment {
                 }
 
 
-                //enable and disable buttons so they can email but not select another contact
-                //mContactButton.setEnabled(false);
+
 
 
 
 
             } finally {
+                //closing the cursors
                 c.close();
                 emailCursor.close();
                 addressCursor.close();
@@ -210,6 +224,7 @@ public class ContactFragment extends Fragment {
     private String getMessage(){
 
 
+        //creates the string for our message, with the fields its gathered
 
         String report = ("This is the contact info for\n" + mMessage.getmContact() + ", \n" + "Phone: " +
         mMessage.getmPhone() + "\n" + "Email: " + mMessage.getmEmail() +

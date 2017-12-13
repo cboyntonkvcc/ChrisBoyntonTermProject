@@ -8,15 +8,19 @@ import java.util.Random;
  * Created by chrisboynton on 12/6/17.
  */
 
+//this class is used to decide which string should be used based on the importance number
+    //then makes a random number and goes from there
 public class GenerateText {
 
-    int output;
-    String Value;
+    private int output;
+
     Random randomGenerator = new Random();
-    int codeValue;
-    int randomInt = randomGenerator.nextInt(3);
+
+    //generates a random number based on the build in methood
+    private int randomInt = randomGenerator.nextInt(3);
 
 
+//passes in the importance level
     public int generateText(int impValue) {
 
 
@@ -42,7 +46,7 @@ public class GenerateText {
 
 
 
-
+//puts the random value to the string value
     private void leastImportant()
     {
         if (randomInt == 0) {

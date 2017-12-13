@@ -68,6 +68,8 @@ public class TextFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_text, container , false);
 
+        //wire up all our widgets
+
         mMinusButton = (Button) v.findViewById(R.id.minus_button);
         mPlusButton = (Button) v.findViewById(R.id.plus_button);
         mCount = (TextView) v.findViewById(R.id.number_textview);
@@ -84,6 +86,9 @@ public class TextFragment extends Fragment {
 
         mContactName = (TextView) v.findViewById(R.id.contact_textview);
 
+
+
+        //keeps the number above 0 and will subtract if it can
         mMinusButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -99,6 +104,9 @@ public class TextFragment extends Fragment {
             }
         });
 
+
+
+        //adds to the counter and stops if it is about to go over 10
         mPlusButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -128,6 +136,7 @@ public class TextFragment extends Fragment {
 
                 int selected = mRelationRadioGroup.getCheckedRadioButtonId();
 
+                //makes sure a radiobutton is selected before sending the message
                 if (selected == -1)
                 {
                     Toast.makeText(getActivity(), R.string.not_selected, Toast.LENGTH_SHORT).show();
@@ -135,7 +144,10 @@ public class TextFragment extends Fragment {
                 }else {
 
                     if (selected == mFamilyRadioButton.getId()) {
+                        //generates the text message in the generateText class
+                        //sends in the counter
                          mMessageInt = generateText.generateText(mCounter);
+                        //adds the sign off of the message based on
                          mMessageEnding = getString(R.string.family_end);
 
                     }
@@ -156,7 +168,8 @@ public class TextFragment extends Fragment {
 
                     }
 
-
+                    //send the action to open the messageing app and sends with it the information from
+                    //the contact selected
                     Intent i = new Intent(Intent.ACTION_SEND);
                     i.setType("text/plain");
                     i.putExtra(Intent.EXTRA_TEXT, getTextMessage(mMessageInt));
@@ -168,6 +181,8 @@ public class TextFragment extends Fragment {
             }
         });
 
+
+        //starts the Contacts app and retrieves the data from the selected contact
         final Intent pickContact = new Intent(Intent.ACTION_PICK,
                 ContactsContract.Contacts.CONTENT_URI);
         mContactButton = (Button) v.findViewById(R.id.contact_button);
@@ -177,11 +192,13 @@ public class TextFragment extends Fragment {
             }
         });
 
+        //if there is a value then it will put it in the button so you can see who you are messageing
         if(mText.getmContact() != null){
             mContactButton.setText(mText.getmContact());
         }
 
 
+        //checks for the default contact app
         PackageManager packageManager = getActivity().getPackageManager();
         if(packageManager.resolveActivity(pickContact, PackageManager.MATCH_DEFAULT_ONLY) == null){
             mContactButton.setEnabled(false);
@@ -194,6 +211,7 @@ public class TextFragment extends Fragment {
 
 
 
+    //once the contact is selected and the app returns to my fragments this gets called
    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode != Activity.RESULT_OK){
@@ -216,7 +234,7 @@ public class TextFragment extends Fragment {
                 //set the name from the database
                 int nameId = c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
 
-                //set the email from the data base
+                //set the Phone from the data base
                 int phoneId = c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA);
 
 
@@ -232,8 +250,6 @@ public class TextFragment extends Fragment {
 
 
                 }
-                //enable and disable buttons so they can email but not select another contact
-                //mContactButton.setEnabled(false);
                 mSendMessageButton.setEnabled(true);
                 mContactName.setText(name);
 
@@ -249,6 +265,7 @@ public class TextFragment extends Fragment {
 
 
 
+        //makes the message string
         String report = ("" + mText.getmContact() + ", \n" + getString(message) + "\n\n" + mMessageEnding);
 
 

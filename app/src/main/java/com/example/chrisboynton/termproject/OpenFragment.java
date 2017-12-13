@@ -28,6 +28,7 @@ public class OpenFragment extends Fragment {
         mContactButton = (Button) view.findViewById(R.id.send_contact_button);
         mRandomButton = (Button) view.findViewById(R.id.send_quick_text_button);
 
+        //starts the random generation functionality part of our app
         mRandomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,6 +38,7 @@ public class OpenFragment extends Fragment {
             }
         });
 
+        //starts the share contact info part of our app
         mContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

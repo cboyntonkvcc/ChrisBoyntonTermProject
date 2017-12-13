@@ -6,10 +6,11 @@ import java.util.UUID;
  * Created by chrisboynton on 11/5/17.
  */
 
+//Text model for our text applys getters and setters to the object
+
 public class Text {
 
-    private UUID mId;
-    private String mTitle;
+
     private String mContact;
     private String mPhone;
     private String mEmail;
@@ -17,22 +18,6 @@ public class Text {
     private String mRecieve;
 
 
-
-    public UUID getmId() {
-        return mId;
-    }
-
-    public void setmId(UUID mId) {
-        this.mId = mId;
-    }
-
-    public String getmTitle() {
-        return mTitle;
-    }
-
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
-    }
 
     public String getmContact() {
         return mContact;

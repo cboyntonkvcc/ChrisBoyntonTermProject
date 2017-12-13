@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentManager;
  * Created by chrisboynton on 12/12/17.
  */
 
+//singleton probaly not 100% necesary as the app is right now but
+    //maybe future proofs the app some
 public abstract class SingleFragmentActivity extends FragmentActivity{
 
     protected abstract Fragment createFragment();
