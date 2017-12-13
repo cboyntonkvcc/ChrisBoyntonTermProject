@@ -96,6 +96,7 @@ public class ContactFragment extends Fragment {
             public void onClick(View v) {
                 startActivityForResult(pickContacts, REQUEST_CONTACTS);
                 mContact.setEnabled(false);
+                mSendMessage.setEnabled(true);
 
             }
         });
@@ -162,7 +163,7 @@ public class ContactFragment extends Fragment {
                 //set the email
                 int emailId = emailCursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA);
 
-                //set the adress
+                //set the address
                 int addressId = addressCursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS);
 
 
