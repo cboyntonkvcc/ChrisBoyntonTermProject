@@ -12,6 +12,9 @@ public class Text {
     private String mTitle;
     private String mContact;
     private String mPhone;
+    private String mEmail;
+    private String mAddress;
+    private String mRecieve;
 
 
 
@@ -47,5 +50,27 @@ public class Text {
         this.mPhone = mPhone;
     }
 
+    public String getmEmail() {
+        return mEmail;
+    }
 
+    public void setmEmail(String mEmail) {
+        this.mEmail = mEmail;
+    }
+
+    public String getmAddress() {
+        return mAddress;
+    }
+
+    public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
+    }
+
+    public String getmRecieve() {
+        return mRecieve;
+    }
+
+    public void setmRecieve(String mRecieve) {
+        this.mRecieve = mRecieve;
+    }
 }

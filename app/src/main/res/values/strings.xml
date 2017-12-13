@@ -42,6 +42,17 @@
     <string name="significant_end">Love your favorite person</string>
 
 
+    <string name="opening_message">Pick a Option:</string>
+    <string name="info_text">Send Contact Information</string>
+    <string name="forgot_text">Send a quick reminder text</string>
+
+    <string name="information_for_contact_fragment">Select a Contact you want info on:</string>
+    <string name="contact_info">Collect Contact info</string>
+    <string name="select_contact">Select Contact to send Information</string>
+
+
+
+
 
 
 
